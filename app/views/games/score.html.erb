@@ -8,3 +8,6 @@
   <% else %>
     <p>Sorry but <strong><%=@word%></strong> can't be built out of <%= @sample.join(',')%> </p>
 <% end %>
+
+
+<a> <%= link_to "Play Again!", new_path %> </a>

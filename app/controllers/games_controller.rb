@@ -28,6 +28,8 @@ class GamesController < ApplicationController
     else
       @message = answers[2]
     end
+
+    @tag = "<h1>hello!!!</h1>"
   end
 
   def english_word?(word)
