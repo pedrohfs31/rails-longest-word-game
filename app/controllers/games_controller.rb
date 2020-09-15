@@ -14,22 +14,9 @@ class GamesController < ApplicationController
   def score
     @word = params[:word].upcase
     @sample = params[:sample].split('')
-    @message = ''
-    answers = [
-      "Congratulations, #{@word} is a valid English Word",
-      "Sorry but #{@word} does not seem to be a valid English word",
-      "Sorry but #{@word} can't be built out of #{@sample.join(',')}"
-    ]
 
     @response = { english: english_word?(@word), valid: included?(@word, @sample) }
 
-    if included?(@word, @sample)
-      @message = english_word?(@word) ? answers[0] : answers[1]
-    else
-      @message = answers[2]
-    end
-
-    @tag = "<h1>hello!!!</h1>"
   end
 
   def english_word?(word)
