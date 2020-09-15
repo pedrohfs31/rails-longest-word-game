@@ -1,0 +1,16 @@
+<h1>New Game</h1>
+<div class="container">
+
+  <ul class="letters-list">
+    <% @sample.each do |l| %>
+      <li class = "btn btn-info"> <%= l %> </li>
+    <% end %>
+  </ul>
+  <p id = "question">Whats is the longest word you can find?</p>
+  <form id="form" action="/score" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <input type="hidden" name="sample" value = "<%= @sample.join %>">
+    <input id = "input-box" type="text" name="word">
+    <input type="submit" value="Play!">
+  </form>
+</div>
