@@ -12,21 +12,19 @@ class GamesController < ApplicationController
   end
 
   def score
-    # pry-byebug
     @word = params[:word].upcase
-    # url = "https://wagon-dictionary.herokuapp.com/#{@word}"
     @sample = params[:sample].split('')
-
-    @english = english_word?(@word)
-    @included = included?(@word, @sample)
-
     @message = ''
-    if @included
-     @message = @english ? 'well done' : 'not an english word'
+    answers = [
+      "Congratulations, #{@word} is a valid English Word",
+      "Sorry but #{@word} does not seem to be a valid English word",
+      "Sorry but #{@word} can't be built out of #{@sample.join(',')}"
+    ]
 
-
+    if included?(@word, @sample)
+      @message = english_word?(@word) ? answers[0] : answers[1]
     else
-      @message = 'not in the grid'
+      @message = answers[2]
     end
   end
 
@@ -38,18 +36,5 @@ class GamesController < ApplicationController
 
   def included?(guess, grid)
     guess.chars.all? { |letter| guess.count(letter) <= grid.count(letter) }
-  end
-
-  def score_and_message(attempt, grid)
-    if included?(attempt.upcase, grid)
-      if english_word?(attempt)
-
-        [score, "well done"]
-      else
-        [0, "not an english word"]
-      end
-    else
-      [0, "not in the grid"]
-    end
   end
 end
