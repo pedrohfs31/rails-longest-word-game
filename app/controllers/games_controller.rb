@@ -21,6 +21,8 @@ class GamesController < ApplicationController
       "Sorry but #{@word} can't be built out of #{@sample.join(',')}"
     ]
 
+    @response = { english: english_word?(@word), valid: included?(@word, @sample) }
+
     if included?(@word, @sample)
       @message = english_word?(@word) ? answers[0] : answers[1]
     else

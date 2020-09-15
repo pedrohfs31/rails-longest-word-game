@@ -1,5 +1,10 @@
 
-
-<p> <%= @message  %> <p>
-
-<a> <%= link_to "Play Again", new_path %> </a>
+<% if @response[:valid]%>
+  <% if @response[:english] %>
+    <p>Congratulations, <strong><%=@word%></strong> is a valid English Word</p>
+  <% else %>
+    <p>Sorry but <strong><%=@word%></strong> does not seem to be a valid English word</p>
+  <% end %>
+  <% else %>
+    <p>Sorry but <strong><%=@word%></strong> can't be built out of <%= @sample.join(',')%> </p>
+<% end %>
